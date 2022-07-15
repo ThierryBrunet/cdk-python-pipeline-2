@@ -2,9 +2,11 @@ name: base
 channels:
   - defaults
   - conda-forge
+  - pytorch
 dependencies:
   - pandas==1.4.2
   - numpy
+  - pip=22.1.2
   - pip:
     - annoy==1.17.0
     - anytree==2.8.0
