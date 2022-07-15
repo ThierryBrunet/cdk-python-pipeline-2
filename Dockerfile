@@ -5,7 +5,7 @@ RUN ln -s /usr/bin/python3 /usr/bin/python
 RUN ln -s /usr/bin/pip3 /usr/bin/pip
 RUN apt-get update
 RUN apt-get -y install gcc
-RUN apt-get install g++
+RUN apt-get -y install g++
 COPY requirements.txt .
 RUN python --version
 RUN pip install -r requirements.txt
