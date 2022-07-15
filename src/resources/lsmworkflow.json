@@ -1,0 +1,49 @@
+{
+    "StartAt": "sagmaker_processing_demo",
+    "States": {
+        "sagmaker_processing_demo": {
+            "Type": "Task",
+            "Resource": "arn:aws:states:::sagemaker:createProcessingJob.sync",
+            "Parameters": {
+                "AppSpecification": {
+                    "ImageUri": "269359443853.dkr.ecr.us-east-2.amazonaws.com/ds-team:latest"
+                },
+                "ProcessingResources": {
+                    "ClusterConfig": {
+                        "InstanceCount": 1,
+                        "InstanceType": "ml.m5.2xlarge",
+                        "VolumeSizeInGB": 10
+                    }
+                },
+                "ProcessingInputs": [
+                    {
+                        "InputName": "train",
+                        "S3Input": {
+                            "S3Uri": "s3://ps-dev-ewis/EWIS/qualitycheck/train/train_with_header.csv",
+                            "LocalPath": "/opt/ml/processing/input",
+                            "S3DataType": "S3Prefix",
+                            "S3InputMode": "File",
+                            "S3DataDistributionType": "FullyReplicated",
+                            "S3CompressionType": "None"
+                        }
+                    }
+                ],
+                "ProcessingOutputConfig": {
+                    "Outputs": [
+                        {
+                            "OutputName": "trainoutput",
+                            "S3Output": {
+                                "S3Uri": "s3://ps-dev-ewis/EWIS/qualitycheck/train/",
+                                "LocalPath": "/opt/ml/processing/output/train",
+                                "S3UploadMode": "EndOfJob"
+                            }
+                        }
+                    ]
+                },
+                "RoleArn": "arn:aws:iam::269359443853:role/SagemakerDevelopmentRole",
+                "ProcessingJobName.$": "$$.Execution.Name"
+            },
+            "End": true
+        }
+    }
+}

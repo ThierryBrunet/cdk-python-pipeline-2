@@ -1,0 +1,6 @@
+# This works best with python 3.9.12
+# if required for debugging with spyder use: pip install -Iv spyder-kernels==2.3
+annoy==1.17.0
+anytree==2.8.0
+sentence-transformers==2.2.0
+pandas==1.4.2
