@@ -11,7 +11,7 @@ RUN python --version
 RUN pip install -r requirements.txt
 
 COPY src/ /
-RUN ls -la /
+RUN ls -la /resources
 ENTRYPOINT ["python", "/main.py"]
 
 # FROM continuumio/miniconda3:latest
