@@ -10,6 +10,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
+      - echo "this is to test build gets triggered or not"
       - docker build -t lsmtest:latest .
 artifacts:
     files: imagedefinitions.json
