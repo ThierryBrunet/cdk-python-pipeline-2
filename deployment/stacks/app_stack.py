@@ -38,7 +38,7 @@ class AppStack(Stack):
                     "pip install -r requirements.txt",
                     "cdk synth",
                 ],
-                primary_output_directory="./build",
+                primary_output_directory="deployment/cdk.out",
             ),
         )
 
