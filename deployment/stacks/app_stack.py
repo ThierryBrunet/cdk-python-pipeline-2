@@ -32,7 +32,7 @@ class AppStack(Stack):
                 "Synth",
                 input=cp_source,
                 commands=[
-                    "npm install -g aws-cdk",
+                    "npm install -g aws-cdk@2.33.0",
                     "ls",
                     "cd deployment",
                     "pip install -r requirements.txt",
