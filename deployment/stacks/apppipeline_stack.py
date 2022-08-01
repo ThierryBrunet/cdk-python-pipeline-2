@@ -61,9 +61,15 @@ class AppPipelineStack(Stack):
             type=cp_actions.CodeBuildActionType.BUILD,
         )
 
+        manualaprroval_action = cp_actions.ManualApprovalAction(action_name="Approve")
+
         # Source Artifact Stage
         source_stage = cp.StageProps(
             stage_name="Source", actions=[github_source_action]
+        )
+
+        manual_stage = cp.StageProps(
+            stage_name="ApprovalForBuils", actions=[manualaprroval_action]
         )
 
         # Build Stage
@@ -78,6 +84,6 @@ class AppPipelineStack(Stack):
             cross_account_keys=False,
             pipeline_name=f"lsm-runtime-pipeline",
             artifact_bucket=s3_bucket_info,
-            stages=[source_stage, build_stage],
+            stages=[source_stage, manual_stage, build_stage],
         )
 
