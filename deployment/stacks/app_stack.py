@@ -8,6 +8,7 @@ from aws_cdk import (
 )
 from constructs import Construct
 from .resources_stage import ResourceStage
+from .apppipeline_stage import AppPipelineStage
 
 
 class AppStack(Stack):
@@ -44,3 +45,8 @@ class AppStack(Stack):
 
         resource_stage = ResourceStage(self, "psdsdemoresourcestage2022")
         cdk_pipeline.add_stage(resource_stage)
+
+        apppipeline_stage = AppPipelineStage(self, "psdsdemoapppipelinestage2022")
+
+        cdk_pipeline.add_stage(apppipeline_stage)
+
