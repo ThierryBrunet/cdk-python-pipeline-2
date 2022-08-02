@@ -18,6 +18,10 @@ class ModelDeployStack(Stack):
 
         MODEL_V1_KEY_PREFIX = "model-v1"
 
+        resource_bucket = s3.Bucket.from_bucket_name(
+            self, "modeltransferbucket", bucket_name="psdsprac2022"
+        )
+
         s3_deploy.BucketDeployment(
             self,
             "model_deploy",
@@ -34,6 +38,7 @@ class ModelDeployStack(Stack):
                 )
             ],
             destination_key_prefix=MODEL_V1_KEY_PREFIX,
-            destination_bucket="s3://psdsprac2022/",
+            # destination_bucket="s3://psdsprac2022/",
+            destination_bucket=resource_bucket,
             memory_limit=2048,
         )
