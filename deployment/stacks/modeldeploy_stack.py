@@ -41,5 +41,5 @@ class ModelDeployStack(Stack):
             # destination_bucket="s3://psdsprac2022/",
             destination_bucket=resource_bucket,
             memory_limit=5120,
-            ephemeral_storage_size=5120,
+            ephemeral_storage_size=cdk.Size.gibibytes(5),
         )
