@@ -5,8 +5,6 @@ from aws_cdk import (
     # aws_sqs as sqs,
     # aws_s3 as s3,
     pipelines,
-    aws_iam as iam,
-    aws_codebuild as cb,
 )
 from constructs import Construct
 from .resources_stage import ResourceStage
@@ -33,46 +31,17 @@ class AppStack(Stack):
             self,
             id=construct_id,
             pipeline_name="dsdemopipeline",
-            # synth=pipelines.ShellStep(
-            #     "Synth",
-            #     input=cp_source,
-            #     commands=[
-            #         "npm install -g aws-cdk@2.33.0",
-            #         "ls",
-            #         "cd deployment",
-            #         "pip install -r requirements.txt",
-            #         "cdk synth",
-            #     ],
-            #     primary_output_directory="deployment/cdk.out",
-            # ),
-            synth=pipelines.CodeBuildStep(
-                id=f"lsm-cdkpipeline-dev",
+            synth=pipelines.ShellStep(
+                "Synth",
                 input=cp_source,
                 commands=[
-                    "npm install -g aws-cdk",
+                    "npm install -g aws-cdk@2.33.0",
                     "ls",
                     "cd deployment",
                     "pip install -r requirements.txt",
                     "cdk synth",
                 ],
-                build_environment=cb.BuildEnvironment(privileged=True),
                 primary_output_directory="deployment/cdk.out",
-                role_policy_statements=[
-                    iam.PolicyStatement(
-                        resources=["*"],
-                        actions=[
-                            "s3:*",
-                            "cloudformation:DescribeStacks",
-                            "cloudformation:DeleteChangeSet",
-                            "iam:PassRole",
-                            "cloudformation:CreateChangeSet",
-                            "cloudformation:DescribeChangeSet",
-                            "cloudformation:ExecuteChangeSet",
-                            "sts:AssumeRole",
-                        ],
-                        effect=iam.Effect.ALLOW,
-                    )
-                ],
             ),
         )
 
