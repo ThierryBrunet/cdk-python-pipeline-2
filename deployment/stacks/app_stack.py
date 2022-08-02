@@ -91,9 +91,9 @@ class AppStack(Stack):
         )
         cdk_pipeline.add_stage(caresource_stage, post=[new_manual_approvalstage])
 
-        # deploy_model = ModelDeployStage(self, "psmodeldeploymentstage2022")
+        deploy_model = ModelDeployStage(self, "psmodeldeploymentstage2022")
 
-        # cdk_pipeline.add_stage(deploy_model)
+        cdk_pipeline.add_stage(deploy_model)
 
         apppipeline_stage = AppPipelineStage(self, "psdsdemoapppipelinestage2022")
         cdk_pipeline.add_stage(apppipeline_stage)
