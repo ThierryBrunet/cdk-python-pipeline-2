@@ -40,5 +40,6 @@ class ModelDeployStack(Stack):
             destination_key_prefix=MODEL_V1_KEY_PREFIX,
             # destination_bucket="s3://psdsprac2022/",
             destination_bucket=resource_bucket,
-            memory_limit=2048,
+            memory_limit=5120,
+            ephemeral_storage_size=5120,
         )
