@@ -81,7 +81,7 @@ class AppPipelineStack(Stack):
         pipeline = cp.Pipeline(
             self,
             "CodePipeline",
-            cross_account_keys=False,
+            # cross_account_keys=False,
             pipeline_name=f"lsm-runtime-pipeline",
             artifact_bucket=s3_bucket_info,
             stages=[source_stage, manual_stage, build_stage],

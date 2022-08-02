@@ -8,7 +8,9 @@ class CAResourceStage(cdk.Stage):
     This class contains the stage definition of cdk pipeline (resource).
     """
 
-    def __init__(self, scope: Construct, id: str, bname: str, env=None, **kwargs):
+    def __init__(
+        self, scope: Construct, id: str, bname: str, env: cdk.StackProps, **kwargs
+    ):
         """
         Inits Resource class with scope, id, and props.
 
@@ -18,5 +20,10 @@ class CAResourceStage(cdk.Stage):
         """
         super().__init__(scope=scope, id=id, env=env, **kwargs)
 
-        CAResourcesStack(self, "psdsdemocaresources2022", bname, env)
+        CAResourcesStack(
+            self,
+            "psdsdemocabucket2022",
+            bname,
+            env=cdk.Environment(account="881455463728", region="us-east-1"),
+        )
 

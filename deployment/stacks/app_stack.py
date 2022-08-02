@@ -50,13 +50,16 @@ class AppStack(Stack):
         resource_stage = ResourceStage(self, "psdsdemoresourcestage2022")
         cdk_pipeline.add_stage(resource_stage, post=[manual_approvalstage])
 
+        new_manual_approvalstage = pipelines.ManualApprovalStep("Approve")
+
         caresource_stage = CAResourceStage(
             self,
-            "psdsdemocaresources2022",
-            "prodpsdsprac2022",
-            cdk.Environment(account="881455463728", region="us-east-1"),
+            id="psdsdemocaresources2022",
+            bname="prodpsdsprac2022",
+            env=cdk.Environment(account="881455463728", region="us-east-1"),
         )
-        cdk_pipeline.add_stage(caresource_stage, post=[manual_approvalstage])
+
+        cdk_pipeline.add_stage(caresource_stage, post=[new_manual_approvalstage])
 
         apppipeline_stage = AppPipelineStage(self, "psdsdemoapppipelinestage2022")
         cdk_pipeline.add_stage(apppipeline_stage)

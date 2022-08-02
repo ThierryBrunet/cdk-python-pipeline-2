@@ -10,9 +10,14 @@ from constructs import Construct
 
 class CAResourcesStack(Stack):
     def __init__(
-        self, scope: Construct, construct_id: str, bname: str, **kwargs
+        self,
+        scope: Construct,
+        construct_id: str,
+        bname: str,
+        env: cdk.StackProps,
+        **kwargs,
     ) -> None:
-        super().__init__(scope, construct_id, **kwargs)
+        super().__init__(scope, construct_id, env=env, **kwargs)
 
         # The code that defines your stack goes here
 
