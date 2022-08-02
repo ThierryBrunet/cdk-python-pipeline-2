@@ -9,6 +9,7 @@ from aws_cdk import (
 from constructs import Construct
 from .resources_stage import ResourceStage
 from .apppipeline_stage import AppPipelineStage
+from .cross_account_resources_stage import CAResourceStage
 
 
 class AppStack(Stack):
@@ -49,7 +50,14 @@ class AppStack(Stack):
         resource_stage = ResourceStage(self, "psdsdemoresourcestage2022")
         cdk_pipeline.add_stage(resource_stage, post=[manual_approvalstage])
 
-        apppipeline_stage = AppPipelineStage(self, "psdsdemoapppipelinestage2022")
+        caresource_stage = CAResourceStage(
+            self,
+            "psdsdemocaresources2022",
+            "prodpsdsprac2022",
+            cdk.Environment(account="881455463728", region="us-east-1"),
+        )
+        cdk_pipeline.add_stage(caresource_stage, post=[manual_approvalstage])
 
+        apppipeline_stage = AppPipelineStage(self, "psdsdemoapppipelinestage2022")
         cdk_pipeline.add_stage(apppipeline_stage)
 
