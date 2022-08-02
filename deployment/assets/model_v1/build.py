@@ -28,5 +28,7 @@ def zipdir(path, ziph):
             )
 
 
-with zipfile.ZipFile(OUTPUT_DIR, "w", zipfile.ZIP_DEFLATED) as zipf:
+with zipfile.ZipFile(
+    os.path.join(OUTPUT_DIR, "model.zip"), "w", zipfile.ZIP_DEFLATED
+) as zipf:
     zipdir(STAGING_DIR, zipf)
