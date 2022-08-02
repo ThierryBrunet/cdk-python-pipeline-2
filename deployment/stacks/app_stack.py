@@ -43,8 +43,11 @@ class AppStack(Stack):
             ),
         )
 
+        # manual approval step
+        manual_approvalstage = pipelines.ManualApprovalStep("Approve")
+
         resource_stage = ResourceStage(self, "psdsdemoresourcestage2022")
-        cdk_pipeline.add_stage(resource_stage)
+        cdk_pipeline.add_stage(resource_stage, post=[manual_approvalstage])
 
         apppipeline_stage = AppPipelineStage(self, "psdsdemoapppipelinestage2022")
 
