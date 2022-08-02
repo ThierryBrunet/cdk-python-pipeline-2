@@ -10,6 +10,7 @@ from constructs import Construct
 from .resources_stage import ResourceStage
 from .apppipeline_stage import AppPipelineStage
 from .cross_account_resources_stage import CAResourceStage
+from .modeldeploy_stage import ModelDeployStage
 
 
 class AppStack(Stack):
@@ -46,20 +47,22 @@ class AppStack(Stack):
 
         # manual approval step
         manual_approvalstage = pipelines.ManualApprovalStep("Approve")
-
         resource_stage = ResourceStage(self, "psdsdemoresourcestage2022")
         cdk_pipeline.add_stage(resource_stage, post=[manual_approvalstage])
 
+        # manual Approval step
         new_manual_approvalstage = pipelines.ManualApprovalStep("Approve")
-
         caresource_stage = CAResourceStage(
             self,
             id="psdsdemocaresources2022",
             bname="prodpsdsprac2022",
             env=cdk.Environment(account="881455463728", region="us-east-1"),
         )
-
         cdk_pipeline.add_stage(caresource_stage, post=[new_manual_approvalstage])
+
+        deploy_model = ModelDeployStage(self, "psmodeldeploymentstage2022")
+
+        cdk_pipeline.add_stage(deploy_model)
 
         apppipeline_stage = AppPipelineStage(self, "psdsdemoapppipelinestage2022")
         cdk_pipeline.add_stage(apppipeline_stage)

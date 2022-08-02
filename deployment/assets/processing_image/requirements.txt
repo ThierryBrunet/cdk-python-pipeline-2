@@ -1,0 +1,9 @@
+numpy==1.20
+#annoy==1.17
+pandas==1.0.1
+networkx==2.4
+treelib==1.6.1
+boto3==1.17
+s3fs==2021.4
+xlrd==1.2.0
+scikit-learn==0.22.1

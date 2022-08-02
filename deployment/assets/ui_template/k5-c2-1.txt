@@ -1,0 +1,28 @@
+<script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+
+<crowd-form>
+  <p><strong>Reference</strong></p>
+  <p>[{{ task.input.input.id }}][{{ task.input.input.code }}] {{ task.input.input.text }}</p>
+  
+  <p><strong>Proposed Matches</strong></p>
+
+  {% for match in task.input.matches %}
+      <p>[{{ match.id }}][{{ match.code }}] {{ match.text }}</p>
+      <crowd-radio-group>
+          <crowd-radio-button name="rating__{{ forloop.index }}__notmatch__{{ match.id }}" value="not-match">Not a match</crowd-radio-button>
+          <crowd-radio-button name="rating__{{ forloop.index }}__greatmatch__{{ match.id }}" value="great-match">Great match</crowd-radio-button>
+      </crowd-radio-group>
+  {% endfor %}
+  
+  <crowd-input name="write-in-id" label="ID of better match"></crowd-input>
+  
+  <crowd-text-area name="comment" rows="4" label="Optional comment or explanation"></crowd-text-area>
+
+  <short-instructions>
+    Your custom quick instructions and examples
+  </short-instructions>
+
+  <full-instructions>
+    Your custom detailed instracutions and more examples
+  </full-instructions>
+</crowd-form>

@@ -1,0 +1,82 @@
+<script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+
+<style>
+  
+  crowd-card {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .card {
+    margin: 10px;
+  }
+  
+  .toggle {
+    margin-top: 20px;
+  }
+  
+  .hideable {
+    display: none;
+  }
+  
+  pre {
+    white-space: pre-wrap;
+    font-size: 80%;
+  }
+  
+</style>
+
+<crowd-form>
+  <h3>Reference</h3>
+  <crowd-card>
+    <div class="card">
+      <span>[{{ task.input.reference.id }}] <strong>{{ task.input.reference.code }}</strong></span>
+      <p>{{ task.input.reference.text }}</p>
+      <div class="toggle"><a href="javascript:toggle(more0)">show/hide more</a></div>
+      <div id="more0" class="hideable"><pre>{{ task.input.reference.tree | skip_autoescape }}</pre></div>
+      </div>
+    </crowd-card>
+  
+  <h3>Proposed Matches</h3>
+  
+  {% for match in task.input.matches %}
+    <crowd-card>
+    <div class="card">
+      <span>[{{ match.id }}] <strong>{{ match.code }}</strong></span>
+      <p>{{ match.text }}</p>
+      <crowd-checkbox name="match__{{ forloop.index }}__{{ match.id }}">Match</crowd-checkbox>
+      <div class="toggle"><a href="javascript:toggle(more{{ forloop.index }})">show/hide more</a></div>
+      <div id="more{{ forloop.index }}" class="hideable"><pre>{{ match.tree | skip_autoescape }}</pre></div>
+      </div>
+    </crowd-card>
+  {% endfor %}
+  
+  <h3>Additional info</h3>
+  
+  <crowd-checkbox name="no-match-expected">No match expected for reference standard</crowd-checkbox>
+  
+  <crowd-input name="write-in-id" label="ID of a better match. If providing multiple IDs, separate them with a comma."></crowd-input>
+  
+  <crowd-text-area name="comment" rows="2" label="Optional comment or explanation"></crowd-text-area>
+
+  <short-instructions>
+    Your custom quick instructions and examples
+  </short-instructions>
+
+  <full-instructions>
+    Your custom detailed instructions and more examples
+  </full-instructions>
+</crowd-form>
+
+<script>
+  // toggle display for element e
+  function toggle(e)
+  {
+    if (e.style.display === "none"){
+      e.style.display = "block";
+    } else {
+      e.style.display = "none";
+    }
+  }
+</script>
