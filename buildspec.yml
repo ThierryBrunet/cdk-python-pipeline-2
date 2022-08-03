@@ -6,12 +6,14 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - python --version
+      - aws --version
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
       - echo "this is to test build gets triggered or not"
       #- docker build -t lsmtest:latest .
+      - aws --version
       - ls -la
       - pwd
       - cd deployment/assets/model_local/
@@ -22,6 +24,7 @@ phases:
       - docker run -v $PWD:/modeldata lsmtest:latest
       - ls -la
       - pwd
+      - aws --version
       
 artifacts:
     files: imagedefinitions.json
