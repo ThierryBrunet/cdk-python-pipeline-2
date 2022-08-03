@@ -17,8 +17,9 @@ phases:
       - cd deployment/assets/model_local/
       - pwd
       - ls -la
+      - echo "${PWD}"
       - docker build -t lsmtest:latest .
-      - docker run -v ./:/modeldata lsmtest:latest
+      - docker run -v $PWD:/modeldata lsmtest:latest
       - ls -la
       - pwd
       
