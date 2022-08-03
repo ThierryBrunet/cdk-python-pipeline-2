@@ -11,6 +11,16 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...
       - echo "this is to test build gets triggered or not"
+      #- docker build -t lsmtest:latest .
+      - ls -la
+      - pwd
+      - cd deployment/assets/model_local/
+      - pwd
+      - ls -la
       - docker build -t lsmtest:latest .
+      - docker run -v ./:/modeldata lsmtest:latest
+      - ls -la
+      - pwd
+      
 artifacts:
     files: imagedefinitions.json

@@ -6,7 +6,10 @@ import zipfile
 print(path.join("deployment", "assets", "model_v1"))
 print(tarfile)
 
-OUTPUT_DIR = "/Users/nyatih/github/lsm/deployment/assets/"
+# OUTPUT_DIR = "/Users/nyatih/github/lsm/deployment/assets/"
+# STAGING_DIR = "/Users/nyatih/github/lsm/deployment/assets/model_v1/code/"
+
+OUTPUT_DIR = "/Users/nyatih/github/lsm/deployment/assets/out/"
 STAGING_DIR = "/Users/nyatih/github/lsm/deployment/assets/model_v1/code/"
 
 
@@ -20,11 +23,19 @@ def zipdir(path, ziph):
             )
 
 
-with zipfile.ZipFile(
-    "/Users/nyatih/github/lsm/deployment/assets/model.zip", "w", zipfile.ZIP_DEFLATED
-) as zipf:
-    zipdir("/Users/nyatih/github/lsm/deployment/assets/model_v1/code/", zipf)
+# with zipfile.ZipFile(
+#     "/Users/nyatih/github/lsm/deployment/assets/model.zip", "w", zipfile.ZIP_DEFLATED
+# ) as zipf:
+#     zipdir("/Users/nyatih/github/lsm/deployment/assets/model_v1/code/", zipf)
 
 # with tarfile.open(os.path.join(OUTPUT_DIR, "model.tar.gz"), mode="w:gz") as archive:
 #     archive.add(STAGING_DIR, recursive=True)
+
+with tarfile.open(os.path.join(OUTPUT_DIR, "model.tar.gz"), mode="w:gz") as archive:
+    archive.add(STAGING_DIR, recursive=True)
+
+with zipfile.ZipFile(
+    "/Users/nyatih/github/lsm/deployment/assets/model.zip", "w", zipfile.ZIP_DEFLATED
+) as zipf:
+    zipdir("/Users/nyatih/github/lsm/deployment/assets/out/", zipf)
 
