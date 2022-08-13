@@ -1,0 +1,25 @@
+repository: "lsm-crosswalk"
+prefix: "ds"
+
+environments:
+  dev:
+    branch: develop
+    s3_prefix: lsm-crosswalk
+    eventbus_prefix: lsm-crosswalk
+    state_machine_prefix: lsm-crosswalk
+    tag_env: Development  
+
+  qa:
+    branch: qa
+    s3_prefix: lsm-crosswalk
+    eventbus: lsm-crosswalk
+    state_machine_prefix: lsm-crosswalk
+    tag_env: Silver 
+
+  prod:
+    branch: main
+    s3_prefix: lsm-crosswalk
+    eventbus_prefix: lsm-crosswalk
+    state_machine_prefix: lsm-crosswalk
+    tag_env: Production 
+    
